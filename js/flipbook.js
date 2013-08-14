@@ -5,7 +5,6 @@
  * Copyright 2013 Wonderful Co.
  * Licensed under the MIT license: http://www.opensource.org/licenses/mit-license.php
  **/
-
 ;(function($) {
 	
 	var Flipbook = function(el,options) {
@@ -228,7 +227,7 @@
 		}
 		
 		setup();
-	}
+	};
 	
 	// plug it in
 	$.fn.flipbook = function(options) {
