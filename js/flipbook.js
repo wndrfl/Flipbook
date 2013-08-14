@@ -61,7 +61,7 @@
 		var bindMouse = function() {
 
 			if(vars.isPlaying) {
-				stop();
+				stopFlipbook();
 			}
 
 			if(vars.isMobile) {
@@ -77,7 +77,7 @@
 			}
 		}
 		
-		var play = function() {
+		var playFlipbook = function() {
 			vars.isPlaying = true;
 			var interval = 1000/settings.frameRate;
 			vars.playTimer = setInterval(function() {
@@ -153,7 +153,7 @@
 			
 				// autoplay?
 				if(settings.autoplay) {
-					play();
+					playFlipbook();
 				}
 			
 				// on drag for mobile
@@ -208,7 +208,7 @@
 			showImage(vars.currentFrame);
 		}
 
-		var stop = function() {
+		var stopFlipbook = function() {
 			vars.isPlaying = false;
 			clearInterval(vars.playTimer);
 		}
@@ -223,7 +223,7 @@
 
 			// RETURN TO PLAY?
 			if(settings.autoplay) {
-				play();
+				playFlipbook();
 			}
 		}
 		
