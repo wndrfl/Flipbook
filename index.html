@@ -3,39 +3,52 @@
 <head>
 	<link rel="stylesheet" href="css/flipbook.css" type="text/css" media="screen" title="no title" charset="utf-8">
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-    <script src="js/flipbook.min.js"></script>
-	<title>Flipbook Demo</title>
+    <script src="js/flipbook.js"></script>
+	<title>Flipbook</title>
 </head>
 <body>
+	<a href="http://www.letsgetwonderful.com" class="wonderful-logo" title="Wonderful Co." target="_blank"></a>
+<a href="https://github.com/wndrfl"><img style="position: absolute; top: 0; right: 0; border: 0; z-index:2000;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
 	
-	<div class="prelude">
-		<h1>jQuery Flipbook Plugin</h1>
-		<p>
-			Make Megaman run by moving your mouse left and right over the tile below.
-		</p>
+	<div class="instructions">
+		Make the cat run by moving your mouse left and right.
 	</div>
 	
-	<!-- THIS ELEMENT WILL HOLD THE FLIPBOOK FRAMES -->
-	<div id="megaman" class="flipbook"></div>
+	<div id="cat" class="flipbook">
+		<div class="prelude">
+			<div class="download-links">
+				<a href="https://github.com/Wndrfl/Flipbook" class="github">View on Github</a>
+				<a href="https://github.com/Wndrfl/Flipbook/archive/master.zip" class="download">Download .zip</a>
+			</div>
+		</div>
+	</div>
 	
-	<!-- BIND THE FLIPBOOK TO THE TARGET ELEMENT -->
 	<script type="text/javascript">
-		$('#megaman').flipbook({
+		$('#cat').flipbook({
 			'autoplay':true,
 			'frameRate':15,
-			'wallpaperMode':'contain',
+			'wallpaperMode':'crop',
 			'images': [
-				'img/megaman/megaman_3.png',
-				'img/megaman/megaman_4.png',
-				'img/megaman/megaman_5.png',
-				'img/megaman/megaman_6.png',
-				'img/megaman/megaman_7.png',
-				'img/megaman/megaman_8.png',
-				'img/megaman/megaman_9.png',
-				'img/megaman/megaman_10.png',
-				'img/megaman/megaman_11.png',
-				'img/megaman/megaman_12.png',
-				'img/megaman/megaman_13.png'
+				'img/cat/slide-1.jpg',
+				'img/cat/slide-2.jpg',
+				'img/cat/slide-3.jpg',
+				'img/cat/slide-4.jpg',
+				'img/cat/slide-5.jpg',
+				'img/cat/slide-6.jpg',
+				'img/cat/slide-7.jpg',
+				'img/cat/slide-8.jpg',
+				'img/cat/slide-9.jpg',
+				'img/cat/slide-10.jpg',
+				'img/cat/slide-11.jpg',
+				'img/cat/slide-12.jpg',
+				'img/cat/slide-13.jpg',
+				'img/cat/slide-14.jpg',
+				'img/cat/slide-15.jpg',
+				'img/cat/slide-16.jpg',
+				'img/cat/slide-17.jpg',
+				'img/cat/slide-18.jpg',
+				'img/cat/slide-19.jpg',
+				'img/cat/slide-20.jpg'
 			]
 		});
 	</script>

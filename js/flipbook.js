@@ -65,9 +65,11 @@
 		this.parentElement.css({
 			'background-color':this.options.backgroundColor,
 			'cursor':'col-resize',
-			'position':'relative',
 			'resizeToImage':this.options.resizeToImage
 		});
+		if(this.parentElement.css('position') != 'absolute') {
+			this.parentElement.css('position','relative');
+		}
 		
 		// IF NO IMAGES, BAIL
 		if(this.options.images.length == 0) { return;}
