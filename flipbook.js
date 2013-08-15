@@ -166,14 +166,12 @@
 				
 				// on hover for desktop
 				}else{
-					$parent.hover(
-						function() {
-							bindMouse();
-						},
-						function() {
-							unBindMouse();
-						}
-					);
+					$('body').on("mouseover", $parent, function() {
+				        bindMouse();
+				    });
+					$('body').on("mouseout", $parent, function() {
+				        unBindMouse();
+				    });
 				}
 			});
 		};
