@@ -39,8 +39,6 @@
 			vars.prevX = vars.currentX;
 			vars.currentX = x;
 			
-			
-			stopCoast();
 			detectCurrDirection();
 
 			// if first movement
