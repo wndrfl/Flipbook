@@ -1,55 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" href="css/flipbook.css" type="text/css" media="screen" title="no title" charset="utf-8">
+	<link rel="stylesheet" href="flipbook.css" type="text/css" media="screen" title="no title" charset="utf-8">
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-    <script src="js/flipbook.js"></script>
-	<title>Flipbook</title>
+    <script src="../flipbook.js"></script>
+	<title>Basic Flipbook Demo</title>
 </head>
 <body>
-	<a href="http://www.letsgetwonderful.com" class="wonderful-logo" title="Wonderful Co." target="_blank"></a>
-<a href="https://github.com/wndrfl"><img style="position: absolute; top: 0; right: 0; border: 0; z-index:2000;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
 	
-	<div class="instructions">
-		Make the cat run by moving your mouse left and right.
-	</div>
+	<h1>Basic Flipbook Demo</h1>
 	
-	<div id="cat" class="flipbook">
-		<div class="prelude">
-			<div class="download-links">
-				<a href="https://github.com/Wndrfl/Flipbook" class="github">View on Github</a>
-				<a href="https://github.com/Wndrfl/Flipbook/archive/master.zip" class="download">Download .zip</a>
-			</div>
-		</div>
-	</div>
+	<div id="flipbook"></div>
 	
 	<script type="text/javascript">
-		$('#cat').flipbook({
+		$('#flipbook').flipbook({
 			'autoplay' :false,
 			'fadeFrames':true,
 			'frameRate':15,
 			'wallpaperMode':'crop',
 			'images': [
-				'img/cat/slide-1.jpg',
-				'img/cat/slide-2.jpg',
-				'img/cat/slide-3.jpg',
-				'img/cat/slide-4.jpg',
-				'img/cat/slide-5.jpg',
-				'img/cat/slide-6.jpg',
-				'img/cat/slide-7.jpg',
-				'img/cat/slide-8.jpg',
-				'img/cat/slide-9.jpg',
-				'img/cat/slide-10.jpg',
-				'img/cat/slide-11.jpg',
-				'img/cat/slide-12.jpg',
-				'img/cat/slide-13.jpg',
-				'img/cat/slide-14.jpg',
-				'img/cat/slide-15.jpg',
-				'img/cat/slide-16.jpg',
-				'img/cat/slide-17.jpg',
-				'img/cat/slide-18.jpg',
-				'img/cat/slide-19.jpg',
-				'img/cat/slide-20.jpg'
+				'megaman/megaman_3.png',
+				'megaman/megaman_4.png',
+				'megaman/megaman_5.png',
+				'megaman/megaman_6.png',
+				'megaman/megaman_7.png',
+				'megaman/megaman_8.png',
+				'megaman/megaman_9.png',
+				'megaman/megaman_10.png',
+				'megaman/megaman_11.png',
+				'megaman/megaman_12.png',
+				'megaman/megaman_13.png'
 			]
 		});
 	</script>
