@@ -17,7 +17,7 @@
 		var vars = {
 			backgroundPosition	: 'center',
 			backgroundSize		: 'cover',
-			coastDegradeValue	: 0.96,
+			coastDegradeValue	: 0.98,
 			coastTimer			: null,
 			currentFrame		: 0,
 			currentNotch		: null,
@@ -39,8 +39,6 @@
 			vars.prevX = vars.currentX;
 			vars.currentX = x;
 			
-			
-			stopCoast();
 			detectCurrDirection();
 
 			// if first movement
@@ -173,6 +171,9 @@
 			
 			// if no images, bail
 			if(settings.images.length == 0) { return;}
+			
+			// setup sensitivity
+			vars.notchInterval = 100-settings.sensitivity;
 		
 			// pick wallpaper mode
 			switch(settings.wallpaperMode) {
@@ -308,6 +309,7 @@
 		'frameRate'				: 24,
 		'images'				: {},
 		'resizeContainerToImage': false,
+		'sensitivity'			: 95,
 		'wallpaperMode'			: 'contain'
     };
 	
