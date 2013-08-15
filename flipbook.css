@@ -58,3 +58,14 @@ textarea {
     color: #000;
     padding: 0.2em 0;
 }
+
+@font-face {
+    font-family: 'edmondsans';
+    src: url('fonts/edmondsans-regular-webfont.eot');
+    src: url('fonts/edmondsans-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/edmondsans-regular-webfont.woff') format('woff'),
+         url('fonts/edmondsans-regular-webfont.ttf') format('truetype'),
+         url('fonts/edmondsans-regular-webfont.svg#edmondsans_regularregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
