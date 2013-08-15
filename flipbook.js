@@ -17,6 +17,8 @@
 		var vars = {
 			backgroundPosition	: 'center',
 			backgroundSize		: 'cover',
+			coastDegradeValue	: 0.96,
+			coastTimer			: null,
 			currentFrame		: 0,
 			currentNotch		: null,
 			currentVelocity		: 0,
@@ -27,7 +29,8 @@
 			notchInterval		: 5,
 			playTimer			: null,
 			prevFrame			: null,
-			prevX				: null
+			prevX				: null,
+			velocities			: [],
 		};
 		
 		var $parent = $(el);
@@ -35,28 +38,24 @@
 		var analyzeMovement = function(x) {
 			vars.prevX = vars.currentX;
 			vars.currentX = x;
+			
+			
+			stopCoast();
+			detectCurrDirection();
 
 			// if first movement
 			if(!vars.currentNotch) {
 				vars.currentNotch = vars.currentX;
-				detectVelocity();
-
 			}else{
-
-				// if moving right
-				if(vars.currentX > vars.prevX) {
-					if(vars.currentX >= (vars.currentNotch+vars.notchInterval)) {
-						vars.currentNotch = vars.currentX;
-						detectVelocity();
-						showNextImage();
-					}
-
-				// if moving left	
-				}else{
+				if(vars.currentDirection == 'left') {
 					if(vars.currentX <= (vars.currentNotch-vars.notchInterval)) {
 						vars.currentNotch = vars.currentX;
-						detectVelocity();
 						showPrevImage();
+					}
+				}else{
+					if(vars.currentX >= (vars.currentNotch+vars.notchInterval)) {
+						vars.currentNotch = vars.currentX;
+						showNextImage();
 					}
 				}
 			}
@@ -81,11 +80,42 @@
 			}
 		}
 		
+		var coast = function() {
+			stopCoast();
+			resetVelocities();
+			vars.currentVelocity = vars.currentVelocity*vars.coastDegradeValue;
+			var t = vars.notchInterval / vars.currentVelocity;
+			if(t < 200) {
+				vars.coastTimer = setTimeout(function() {
+					if(vars.currentDirection == 'left') {
+						showPrevImage();
+					}else{
+						showNextImage();
+					}
+				},t);
+			}
+		}
+		
+		var detectCurrDirection = function() {
+			if(vars.currentX > vars.prevX) {
+				vars.currentDirection = 'right';	
+			}else{
+				vars.currentDirection = 'left';
+			}
+		}
+		
 		var detectVelocity = function() {
 			var currTime = new Date().getTime();
 			if(vars.motionTimerStart > 0) {
 				var timeChange = currTime - vars.motionTimerStart;
-				vars.velocity = vars.notchInterval / timeChange;
+				vars.velocities.push(vars.notchInterval / timeChange);
+				
+				var avg = 0;
+				$.each(vars.velocities,function() {
+					avg += this;
+				});
+				avg = avg / vars.velocities.length;
+				vars.currentVelocity = avg;
 			}
 			vars.motionTimerStart = currTime;
 		}
@@ -102,6 +132,24 @@
 			var imgs = imgs.slice(0);
 			
 			$(imgs).each(function(i,v) {
+				
+				// append
+				var div = document.createElement("div");
+				div.className = "flipbook-frame flipbook-frame-"+i;
+				div.style.width = "100%";
+				div.style.height = "100%";
+				div.style.position = "absolute";
+
+				div.style.backgroundImage = "url('"+v+"')";
+				div.style.backgroundPosition = vars.backgroundPosition;
+				div.style.backgroundRepeat = "no-repeat";
+				div.style.backgroundSize = vars.backgroundSize;
+
+				div.style.display = "none";
+
+				$parent.append(div);
+				
+				// preload
 				$('<img>').attr({ src: this }).load(function() {
 
 					settings.images[i] = {
@@ -112,24 +160,13 @@
 
 					imgs.splice(imgs.indexOf(v),1);
 
-					var div = document.createElement("div");
-					div.className = "flipbook-frame flipbook-frame-"+i;
-					div.style.width = "100%";
-					div.style.height = "100%";
-					div.style.position = "absolute";
-
-					div.style.backgroundImage = "url('"+this.src+"')";
-					div.style.backgroundPosition = vars.backgroundPosition;
-					div.style.backgroundRepeat = "no-repeat";
-					div.style.backgroundSize = vars.backgroundSize;
-
-					div.style.display = "none";
-
-					$parent.append(div);
-
 					if(imgs.length == 0) { callback();}
 				});
 			});
+		}
+		
+		var resetVelocities = function() {
+			vars.velocities = [];
 		}
 		
 		var setup = function() {
@@ -196,13 +233,14 @@
 			
 			if(!i) { i=0;}
 
-			if(vars.prevFrame) {
-				$parent.children('.flipbook-frame-'+vars.prevFrame).hide();
+			if(!vars.prevFrame) { vars.prevFrame = 0;}
+			$parent.children('.flipbook-frame-'+vars.prevFrame).hide();
+			$parent.children('.flipbook-frame-'+i).show();
+			
+			if(settings.coast) {
+				detectVelocity();
+				coast();
 			}
-
-			$parent.children('.flipbook-frame-'+i).css({
-				'display':'block'
-			});
 		}
 		
 		var showNextImage = function() {
@@ -221,6 +259,10 @@
 			showImage(vars.currentFrame);
 		}
 
+		var stopCoast = function() {
+			clearTimeout(vars.coastTimer);
+		}
+		
 		var stopFlipbook = function() {
 			vars.isPlaying = false;
 			clearInterval(vars.playTimer);
@@ -260,6 +302,7 @@
 		'autoplay'				: false,
 		'backgroundColor'		: 'transparent',
 		'backgroundPosition'	: 'center',
+		'coast'					: false,
 		'fadeFrames'			: false,
 		'fadeFramesRate'		: null,
 		'frameRate'				: 24,
