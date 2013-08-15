@@ -15,7 +15,7 @@
 	</div>
 	
 	<div id="cat" class="flipbook">
-		<div class="prelude">
+		<div id="prelude" class="prelude">
 			<div class="download-links">
 				<a href="https://github.com/Wndrfl/Flipbook" class="github">View on Github</a>
 				<a href="https://github.com/Wndrfl/Flipbook/archive/master.zip" class="download">Download .zip</a>
@@ -24,6 +24,17 @@
 	</div>
 	
 	<script type="text/javascript">
+		$('#prelude').css({
+			top			: '-=20',	
+			opacity	:'0'
+		});
+		$(document).ready(function() {
+			$('#prelude').animate({
+				top		: '50%',
+				opacity : '1'
+			},1000);
+		});
+		
 		$('#cat').flipbook({
 			'autoplay' :false,
 			'fadeFrames':true,
